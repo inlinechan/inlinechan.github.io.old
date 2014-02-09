@@ -2,10 +2,10 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+url: http://inlinechan.github.io
+title: With Source Code
+subtitle: Source code, Howto and others..
+author: Hyungchan
 simple_search: http://google.com/search
 description:
 
