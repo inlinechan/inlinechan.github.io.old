@@ -4,7 +4,7 @@
   <title><![CDATA[With Source Code]]></title>
   <link href="http://inlinechan.github.io/atom.xml" rel="self"/>
   <link href="http://inlinechan.github.io/"/>
-  <updated>2014-02-09T16:44:05+09:00</updated>
+  <updated>2014-02-09T16:46:22+09:00</updated>
   <id>http://inlinechan.github.io/</id>
   <author>
     <name><![CDATA[Hyungchan]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Setup-Octoprcess-With-Org-Mode-By-Org-Octopress]]></title>
-    <link href="http://inlinechan.github.io/blog/2014/02/09/setup-octoprcess-with-org-mode-by-org-octopress/"/>
+    <link href="http://inlinechan.github.io/blog/2014-/02/09/setup-octoprcess-with-org-mode-by-org-octopress/"/>
     <updated>2014-02-09T00:00:00+09:00</updated>
-    <id>http://inlinechan.github.io/blog/2014/02/09/setup-octoprcess-with-org-mode-by-org-octopress</id>
+    <id>http://inlinechan.github.io/blog/2014-/02/09/setup-octoprcess-with-org-mode-by-org-octopress</id>
     <content type="html"><![CDATA[<div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
