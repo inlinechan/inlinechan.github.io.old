@@ -1,0 +1,136 @@
+#+TITLE: Setup-Octoprcess-With-Org-Mode-By-Org-Octopress
+#+DATE: 2014-02-09
+#+SETUPFILE: ~/org-sty/setupfile.org
+#+JEKYLL_LAYOUT: post
+#+JEKYLL_CATEGORIES: 
+#+JEKYLL_PUBLISHED: true
+
+* Basic setup ruby and octopress
+** Install RVM(ruby 1.9.3)
+  http://octopress.org/docs/setup/rvm/
+  #+BEGIN_SRC sh
+  curl -L https://get.rvm.io | bash -s stable --ruby
+  rvm install 1.9.3
+  rvm use 1.9.3
+  rvm rubygems latest
+  #+END_SRC
+
+  Append this .bashrc to use newly installed rvm later
+  #+BEGIN_SRC sh
+    if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
+        source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+    fi
+  #+END_SRC
+
+** Setup Octopress
+  http://octopress.org/docs/setup/
+  
+  #+BEGIN_SRC sh
+    git clone git://github.com/imathis/octopress.git octopress
+    cd octopress
+  #+END_SRC
+
+  Next, install dependencies.
+  #+BEGIN_SRC sh
+    gem install bundler
+    rbenv rehash
+    bundle install
+  #+END_SRC
+
+  Install the default Octopress theme.
+  #+BEGIN_SRC sh
+  rake install
+  #+END_SRC
+
+** Deploying to Github Pages
+  http://octopress.org/docs/deploying/github/
+
+  Create [[https://github.com/repositories/new][a new Github repository]] and name the repository with the
+  format username.github.io, where username is your GitHub user name
+  or organization name. For me, inlinechan.github.io
+
+  #+BEGIN_SRC sh
+  rake setup_github_pages
+  #+END_SRC
+
+  Enter git@github.com:username/username.github.io.git to push your
+  pages to github repository. For me,
+  git@github.com:inlinechan/inlinechan.github.io.git 
+
+  Next run,
+  #+BEGIN_SRC sh
+  rake generate
+  rake deploy
+  #+END_SRC
+
+  Don't forget to commit the source for your blog.
+  #+BEGIN_SRC sh
+    git add .
+    git commit -m "your message"
+    git push origin source  
+  #+END_SRC
+
+* Setup org-octopress
+   https://github.com/yoshinari-nomura/org-octopress
+
+** Fix Octopress settings
+   #+NAME: octopress/_config.yml
+   #+BEGIN_SRC ruby
+     # octopress/_config.yml
+     permalink: /blog/:year:month:day:title.html
+     permalink: /blog/:year-:month-:day-:title.html
+   #+END_SRC
+
+** Install org-octopress and its required packages
+   https://github.com/inlinechan/EmacsDot2/commit/f635ffb7771626812c3fa7f8fe650f437c4df0af
+
+   Because I've been using el-get as my package manager, I'll add
+   org-octopress and required packages into el-get packageb list.
+   Note that emacs-ctable(ctable) package is already available by
+   another package so I didn't create a recipe for it.
+
+   #+NAME: el-get-user/recipes/org-octopress.rcp
+   #+BEGIN_SRC lisp
+     ;; el-get-user/recipes/org-octopress.rcp
+     (:name org-octopress
+         :type github
+         :pkgname "yoshinari-nomura/org-octopress"
+         :description "Org-octopress – org-mode in octopress."
+         :website "https://github.com/yoshinari-nomura/org-octopress")
+   #+END_SRC
+
+   #+NAME: el-get-user/recipes/orglue.rcp
+   #+BEGIN_SRC lisp
+     ;; el-get-user/recipes/orglue.rcp
+     (:name orglue
+         :type github
+         :pkgname "yoshinari-nomura/orglue"
+         :description "More functionality to org-mode"
+         :website "https://github.com/yoshinari-nomura/orglue")
+   #+END_SRC
+
+   Make sure to change path some variables in your init.el
+   #+BEGIN_SRC lisp
+     ;; Change ~/octopress to your path
+     (require 'org-octopress)
+     (setq org-octopress-directory-top       "~/octopress/source")
+     (setq org-octopress-directory-posts     "~/octopress/source/_posts")
+     (setq org-octopress-directory-org-top   "~/octopress/source")
+     (setq org-octopress-directory-org-posts "~/octopress/source/blog")
+     (setq org-octopress-setup-file          "~/org-sty/setupfile.org")
+   #+END_SRC
+
+** How to use
+   1. M-x org-octopress
+   2. Compose YYYY-MM-DD-title.org in source/blog directory.
+   3. C-c C-e (org-export-dispatch) and type “P” “x” “octopress”
+   4. In command line terminal:
+      #+BEGIN_SRC sh
+        rake preview
+      #+END_SRC
+   5. Check your article in browser.(http://localhost:4000/)
+
+* TODO
+   - How can I append code block in github.com not gist?
+
+{{{more}}}

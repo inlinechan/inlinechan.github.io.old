@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>My Octopress Blog</title>
-  <meta name="author" content="Your Name">
+  <title>With Source Code</title>
+  <meta name="author" content="Hyungchan">
 
   
-  <meta name="description" content=" Blog Archives Recent Posts ">
+  <meta name="description" content="Table of Contents 1. Basic setup ruby and octopress 1.1. Install RVM(ruby 1.9.3)
+1.2. Setup Octopress
+1.3. Deploying to Github Pages 2. Setup org- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +23,7 @@
   <link rel="canonical" href="http://inlinechan.github.io">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="With Source Code" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -36,9 +38,9 @@
 
 <body   >
   <header role="banner"><hgroup>
-  <h1><a href="/">My Octopress Blog</a></h1>
+  <h1><a href="/">With Source Code</a></h1>
   
-    <h2>A blogging framework for hackers.</h2>
+    <h2>Source code, Howto and others..</h2>
   
 </hgroup>
 
@@ -66,6 +68,285 @@
       <div class="blog-index">
   
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/09/setup-octoprcess-with-org-mode-by-org-octopress/">Setup-Octoprcess-With-Org-Mode-By-Org-Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-09T00:00:00+09:00" pubdate data-updated="true">Feb 9<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Basic setup ruby and octopress</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Install RVM(ruby 1.9.3)</a></li>
+<li><a href="#sec-1-2">1.2. Setup Octopress</a></li>
+<li><a href="#sec-1-3">1.3. Deploying to Github Pages</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Setup org-octopress</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Fix Octopress settings</a></li>
+<li><a href="#sec-2-2">2.2. Install org-octopress and its required packages</a></li>
+<li><a href="#sec-2-3">2.3. How to use</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. <span class="todo TODO">TODO</span> </a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Basic setup ruby and octopress</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Install RVM(ruby 1.9.3)</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+<a href="http://octopress.org/docs/setup/rvm/">http://octopress.org/docs/setup/rvm/</a>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">curl -L https://get.rvm.io | bash -s stable --ruby
+rvm install 1.9.3
+rvm use 1.9.3
+rvm rubygems latest
+</pre>
+</div>
+
+<p>
+Append this .bashrc to use newly installed rvm later
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #859900;">if</span> [[ -s <span style="color: #2aa198;">"$HOME/.rvm/scripts/rvm"</span> ]]; <span style="color: #859900;">then</span>
+    <span style="color: #859900;">source</span> <span style="color: #2aa198;">"$HOME/.rvm/scripts/rvm"</span> <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">This loads RVM into a shell session.</span>
+<span style="color: #859900;">fi</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Setup Octopress</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+<a href="http://octopress.org/docs/setup/">http://octopress.org/docs/setup/</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">git clone git://github.com/imathis/octopress.git octopress
+<span style="color: #859900;">cd</span> octopress
+</pre>
+</div>
+
+<p>
+Next, install dependencies.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">gem install bundler
+rbenv rehash
+bundle install
+</pre>
+</div>
+
+<p>
+Install the default Octopress theme.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">rake install
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Deploying to Github Pages</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+<a href="http://octopress.org/docs/deploying/github/">http://octopress.org/docs/deploying/github/</a>
+</p>
+
+<p>
+Create <a href="https://github.com/repositories/new">a new Github repository</a> and name the repository with the
+format username.github.io, where username is your GitHub user name
+or organization name. For me, inlinechan.github.io
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">rake setup_github_pages
+</pre>
+</div>
+
+<p>
+Enter git@github.com:username/username.github.io.git to push your
+pages to github repository. For me,
+git@github.com:inlinechan/inlinechan.github.io.git 
+</p>
+
+<p>
+Next run,
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">rake generate
+rake deploy
+</pre>
+</div>
+
+<p>
+Don&#8217;t forget to commit the source for your blog.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">git add .
+git commit -m <span style="color: #2aa198;">"your message"</span>
+git push origin source
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Setup org-octopress</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<a href="https://github.com/yoshinari-nomura/org-octopress">https://github.com/yoshinari-nomura/org-octopress</a>
+</p>
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Fix Octopress settings</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+
+<pre class="src src-ruby" id="octopress/_config.yml"><span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">octopress/_config.yml</span>
+<span style="color: #2aa198;">permalink</span>: <span style="color: #2aa198;">/blog/</span><span style="color: #2aa198;">:year</span>:month<span style="color: #2aa198;">:day</span>:title.html
+<span style="color: #2aa198;">permalink</span>: <span style="color: #2aa198;">/blog/</span><span style="color: #2aa198;">:year</span>-<span style="color: #2aa198;">:month</span>-<span style="color: #2aa198;">:day</span>-<span style="color: #2aa198;">:title</span>.html
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Install org-octopress and its required packages</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+<a href="https://github.com/inlinechan/EmacsDot2/commit/f635ffb7771626812c3fa7f8fe650f437c4df0af">https://github.com/inlinechan/EmacsDot2/commit/f635ffb7771626812c3fa7f8fe650f437c4df0af</a>
+</p>
+
+<p>
+Because I&#8217;ve been using el-get as my package manager, I&#8217;ll add
+org-octopress and required packages into el-get packageb list.
+Note that emacs-ctable(ctable) package is already available by
+another package so I didn&#8217;t create a recipe for it.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp" id="el-get-user/recipes/org-octopress.rcp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">el-get-user/recipes/org-octopress.rcp</span>
+(<span style="color: #859900;">:name</span> org-octopress
+    <span style="color: #859900;">:type</span> github
+    <span style="color: #859900;">:pkgname</span> <span style="color: #2aa198;">"yoshinari-nomura/org-octopress"</span>
+    <span style="color: #859900;">:description</span> <span style="color: #2aa198;">"Org-octopress &#8211; org-mode in octopress."</span>
+    <span style="color: #859900;">:website</span> <span style="color: #2aa198;">"https://github.com/yoshinari-nomura/org-octopress"</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp" id="el-get-user/recipes/orglue.rcp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">el-get-user/recipes/orglue.rcp</span>
+(<span style="color: #859900;">:name</span> orglue
+    <span style="color: #859900;">:type</span> github
+    <span style="color: #859900;">:pkgname</span> <span style="color: #2aa198;">"yoshinari-nomura/orglue"</span>
+    <span style="color: #859900;">:description</span> <span style="color: #2aa198;">"More functionality to org-mode"</span>
+    <span style="color: #859900;">:website</span> <span style="color: #2aa198;">"https://github.com/yoshinari-nomura/orglue"</span>)
+</pre>
+</div>
+
+<p>
+Make sure to change path some variables in your init.el
+</p>
+<div class="org-src-container">
+
+<pre class="src src-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Change ~/octopress to your path</span>
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">org-octopress</span>)
+(setq org-octopress-directory-top       <span style="color: #2aa198;">"~/octopress/source"</span>)
+(setq org-octopress-directory-posts     <span style="color: #2aa198;">"~/octopress/source/_posts"</span>)
+(setq org-octopress-directory-org-top   <span style="color: #2aa198;">"~/octopress/source"</span>)
+(setq org-octopress-directory-org-posts <span style="color: #2aa198;">"~/octopress/source/blog"</span>)
+(setq org-octopress-setup-file          <span style="color: #2aa198;">"~/org-sty/setupfile.org"</span>)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> How to use</h3>
+<div class="outline-text-3" id="text-2-3">
+<ol class="org-ol">
+<li>M-x org-octopress
+</li>
+<li>Compose YYYY-MM-DD-title.org in source/blog directory.
+</li>
+<li>C-c C-e (org-export-dispatch) and type “P” “x” “octopress”
+</li>
+<li>In command line terminal:
+<div class="org-src-container">
+
+<pre class="src src-sh">rake preview
+</pre>
+</div>
+</li>
+<li>Check your article in browser.(<a href="http://localhost:4000/">http://localhost:4000/</a>)
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> <span class="todo TODO">TODO</span> </h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>How can I append code block in github.com not gist?
+</li>
+</ul>
+
+<p>
+
+</p>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
@@ -77,6 +358,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/09/setup-octoprcess-with-org-mode-by-org-octopress/">Setup-Octoprcess-With-Org-Mode-By-Org-Octopress</a>
+      </li>
     
   </ul>
 </section>
@@ -91,7 +376,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Your Name -
+  Copyright &copy; 2014 - Hyungchan -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
