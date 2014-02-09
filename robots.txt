@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: inlinechan.github.io/sitemap.xml 
+Sitemap: http://inlinechan.github.io/sitemap.xml 
