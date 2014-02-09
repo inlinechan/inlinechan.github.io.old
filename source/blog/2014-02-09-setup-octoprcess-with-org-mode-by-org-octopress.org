@@ -78,7 +78,7 @@
    #+NAME: octopress/_config.yml
    #+BEGIN_SRC ruby
      # octopress/_config.yml
-     permalink: /blog/:year:month:day:title.html
+     # Seems not necessary for me.
      permalink: /blog/:year-:month-:day-:title.html
    #+END_SRC
 
