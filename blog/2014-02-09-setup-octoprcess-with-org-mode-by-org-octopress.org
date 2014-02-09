@@ -133,6 +133,5 @@
 
 * TODO
    - How can I append code block in github.com not gist?
-   - Hello?
 
 {{{more}}}
